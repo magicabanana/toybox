@@ -1,5 +1,5 @@
-const GRID_WIDTH = 8;
-const GRID_HEIGHT = 8;
+const GRID_WIDTH = 7;
+const GRID_HEIGHT = 7;
 
 // DOM 요소 캐싱
 let gridElement;

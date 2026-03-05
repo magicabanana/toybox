@@ -18,6 +18,8 @@ const btnPause = document.getElementById('btn-pause');
 const startScreen = document.getElementById('start-screen');
 const pauseScreen = document.getElementById('pause-screen');
 const timerBar = document.getElementById('timer-bar');
+const tutorialOverlay = document.getElementById('tutorial-overlay');
+const btnCloseTutorial = document.getElementById('btn-close-tutorial');
 
 // 초기화: 게임 화면이 로드되면 먼저 랜덤 오브젝트를 꽉 채워둠
 document.addEventListener('DOMContentLoaded', () => {
@@ -63,6 +65,11 @@ function handleResize() {
 // 게임 시작 버튼 이벤트
 btnStart.addEventListener('click', () => {
     startGame();
+});
+
+// 튜토리얼 닫기 버튼 이벤트
+btnCloseTutorial.addEventListener('click', () => {
+    tutorialOverlay.style.display = 'none';
 });
 
 // 일시정지 버튼 이벤트
