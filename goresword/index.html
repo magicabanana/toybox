@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Platformer</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #333;
+            /* 캐릭터가 잘 보이도록 어두운 배경 */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            font-family: sans-serif;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .canvas-container {
+            border: 2px solid #555;
+            background-color: #222;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <h2>Web Platformer</h2>
+        <canvas id="gameCanvas" width="600" height="400"></canvas>
+        <p>A/D 키를 눌러 <b>좌우 이동</b> (Run)</p>
+        <p>W 키를 눌러 <b>점프</b> (Jump)</p>
+        <p>스페이스바를 눌러 <b>공격</b> (Attack)</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

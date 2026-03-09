@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Inter:wght@400;500;700&display=swap');
 
 :root {
-    --bg-color: #ffffff;
+    --bg-color: #000000;
     --card-border: #e0e0e0;
     --text-color: #000000;
     --sub-text: #555555;
@@ -44,6 +44,20 @@ header p {
     font-size: 1.1rem;
     color: var(--sub-text);
     font-weight: 500;
+}
+
+.header-logo {
+    max-width: 600px;
+    /* Adjust based on preference */
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+    image-rendering: -webkit-optimize-contrast;
+    /* Webkit browsers */
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    /* Keeps it sharp even when upscaled */
 }
 
 .container {
