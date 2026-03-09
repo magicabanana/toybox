@@ -44,12 +44,9 @@ function updateUI() {
     // Update each item card
     items.forEach((item, index) => {
         const card = document.getElementById(`card-${index}`);
-        const countInput = document.getElementById(`count-${item.name}`);
-        const sellBtn = document.getElementById(`sell-${item.name}`);
         const buyBtn = document.getElementById(`buy-${item.name}`);
 
         const count = itemInventory[item.name];
-        countInput.value = count;
 
         // Unlock logic: index is unlocked if it's 0 or the previous item has been bought
         if (index <= unlockedIndex) {
@@ -57,8 +54,6 @@ function updateUI() {
         } else {
             card.classList.add('locked');
         }
-
-        sellBtn.disabled = count <= 0;
 
         // 쿨타임 확인
         const now = Date.now();
@@ -124,9 +119,7 @@ function init() {
             <h3 class="item-name">${item.name}</h3>
             <p class="item-price">${formatKRW(item.price)}</p>
             <div class="controls">
-                <button class="btn btn-sell" id="sell-${item.name}" onclick="sell('${item.name}', ${index})">Sell</button>
-                <input type="number" class="item-count" id="count-${item.name}" value="0" readonly>
-                <button class="btn btn-buy" id="buy-${item.name}" onclick="buy('${item.name}', ${index})">Buy</button>
+                <button class="btn btn-buy" id="buy-${item.name}" onclick="buy('${item.name}', ${index})">구매</button>
             </div>
             ${item.cooldown ? `<p id="cooldown-${index}" style="display:none; color:#e74c3c; font-size:0.85em; margin-top:6px;"></p>` : ''}
         `;
@@ -134,6 +127,31 @@ function init() {
     });
 
     updateUI();
+}
+
+function showDamage(amount) {
+    const damageEl = document.createElement('div');
+    damageEl.className = 'damage-text';
+    damageEl.textContent = '-' + formatKRW(amount);
+
+    // Get balance bar position
+    const balanceRect = balanceEl.getBoundingClientRect();
+
+    // Spawn around the center of the balance bar with random X offset
+    const xOffset = (Math.random() - 0.5) * 200; // -100 to 100
+    const startX = balanceRect.left + balanceRect.width / 2 + xOffset;
+    // Spawn near the bottom edge of the balance bar
+    const startY = balanceRect.bottom - 10;
+
+    damageEl.style.left = `${startX}px`;
+    damageEl.style.top = `${startY}px`;
+
+    document.body.appendChild(damageEl);
+
+    // Remove element after animation finishes
+    setTimeout(() => {
+        damageEl.remove();
+    }, 1000);
 }
 
 window.buy = function (itemName, index) {
@@ -145,6 +163,8 @@ window.buy = function (itemName, index) {
     if (currentWealth >= item.price && !onCooldown) {
         currentWealth -= item.price;
         itemInventory[itemName]++;
+
+        showDamage(item.price);
 
         // 쿨타임 설정
         if (item.cooldown) {
@@ -167,17 +187,6 @@ window.buy = function (itemName, index) {
     }
 };
 
-window.sell = function (itemName, index) {
-    const item = items.find(i => i.name === itemName);
-    if (itemInventory[itemName] > 0) {
-        currentWealth += item.price;
-        itemInventory[itemName]--;
 
-        // Note: Selling doesn't re-lock items in this implementation
-        // Similar to most games, once unlocked, it stays unlocked.
-
-        updateUI();
-    }
-};
 
 init();

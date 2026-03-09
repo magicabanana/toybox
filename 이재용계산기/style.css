@@ -130,15 +130,6 @@ h1 {
     flex: 1;
 }
 
-.btn-sell {
-    background-color: #eee;
-    color: #333;
-}
-
-.btn-sell:hover:not(:disabled) {
-    background-color: #ddd;
-}
-
 .btn-buy {
     background-color: var(--samsung-blue);
     color: white;
@@ -151,16 +142,6 @@ h1 {
 .btn:disabled {
     cursor: not-allowed;
     opacity: 0.5;
-}
-
-.item-count {
-    width: 60px;
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border: 1px solid #ddd;
-    padding: 8px;
-    border-radius: 4px;
 }
 
 .receipt {
@@ -201,26 +182,7 @@ h1 {
 
 /* Locked Item Styles */
 .item-card.locked {
-    filter: grayscale(1);
-    opacity: 0.7;
-    pointer-events: none;
-    position: relative;
-    user-select: none;
-}
-
-.item-card.locked::after {
-    content: '🔒 Locked';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    z-index: 10;
+    display: none;
 }
 
 /* Victory Modal Styles */
@@ -287,6 +249,34 @@ h1 {
 
 .btn-restart:hover {
     transform: scale(1.05);
+}
+
+.damage-text {
+    position: fixed;
+    color: var(--accent-red);
+    font-size: 2rem;
+    font-weight: 800;
+    text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    pointer-events: none;
+    animation: floatUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translate(-50%, 0) scale(0.5);
+        opacity: 0;
+    }
+
+    10% {
+        transform: translate(-50%, -20px) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -100px) scale(1);
+        opacity: 0;
+    }
 }
 
 @media (max-width: 600px) {
